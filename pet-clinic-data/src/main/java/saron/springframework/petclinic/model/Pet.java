@@ -1,13 +1,12 @@
 package saron.springframework.petclinic.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,5 +22,7 @@ public class Pet extends BaseEntity {
     @JoinColumn(name = "owner_id")
     private Owner owner;
     private LocalDate birthDate;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+    private Set<Visit> visits = new HashSet<>();
 
 }
