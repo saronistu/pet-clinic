@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import saron.springframework.petclinic.model.*;
-import saron.springframework.petclinic.services.OwnerService;
-import saron.springframework.petclinic.services.PetTypeService;
-import saron.springframework.petclinic.services.SpecialityService;
-import saron.springframework.petclinic.services.VetService;
+import saron.springframework.petclinic.services.*;
 
 import java.time.LocalDate;
 
@@ -19,6 +16,7 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     @Override
     public void run(String... args) {
@@ -78,6 +76,13 @@ public class DataLoader implements CommandLineRunner {
         patrisCat.setPetType(savedCatPetType);
         owner2.getPets().add(patrisCat);
         ownerService.save(owner2);
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(patrisCat);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
+
+        visitService.save(catVisit);
 
         System.out.println("Loaded Owners....");
 
