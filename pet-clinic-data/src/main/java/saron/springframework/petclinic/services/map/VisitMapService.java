@@ -1,7 +1,7 @@
 package saron.springframework.petclinic.services.map;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import saron.springframework.petclinic.model.Visit;
 import saron.springframework.petclinic.services.VisitService;
@@ -9,7 +9,7 @@ import saron.springframework.petclinic.services.VisitService;
 import java.util.Set;
 
 @Component
-@RequiredArgsConstructor
+@Profile({"default", "map"})
 public class VisitMapService extends AbstractMapService<Visit, Long> implements VisitService {
 
     @Override

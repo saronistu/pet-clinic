@@ -8,6 +8,8 @@ import saron.springframework.petclinic.repositories.VisitRepository;
 import saron.springframework.petclinic.services.VisitService;
 
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Profile("springdatajpa")
@@ -18,7 +20,8 @@ public class VisitSpringDataJpaService implements VisitService {
 
     @Override
     public Set<Visit> findAll() {
-        return (Set<Visit>) visitRepository.findAll();
+        return StreamSupport.stream(visitRepository.findAll().spliterator(), false)
+                .collect(Collectors.toSet());
     }
 
     @Override

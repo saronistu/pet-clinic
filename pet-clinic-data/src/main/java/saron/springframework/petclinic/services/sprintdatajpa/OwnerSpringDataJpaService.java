@@ -8,6 +8,8 @@ import saron.springframework.petclinic.repositories.OwnerRepository;
 import saron.springframework.petclinic.services.OwnerService;
 
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Profile("springdatajpa")
@@ -18,7 +20,8 @@ public class OwnerSpringDataJpaService implements OwnerService {
 
     @Override
     public Set<Owner> findAll() {
-        return (Set<Owner>) ownerRepository.findAll();
+        return StreamSupport.stream(ownerRepository.findAll().spliterator(), false)
+                .collect(Collectors.toSet());
     }
 
     @Override

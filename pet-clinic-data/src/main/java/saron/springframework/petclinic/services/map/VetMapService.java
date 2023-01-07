@@ -1,6 +1,7 @@
 package saron.springframework.petclinic.services.map;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import saron.springframework.petclinic.model.Speciality;
 import saron.springframework.petclinic.model.Vet;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
+@Profile({"default", "map"})
 public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
 
     private final SpecialityService specialityService;

@@ -8,6 +8,8 @@ import saron.springframework.petclinic.repositories.VetRepository;
 import saron.springframework.petclinic.services.VetService;
 
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Profile("springdatajpa")
@@ -18,7 +20,8 @@ public class VetSpringDataJpaService implements VetService {
 
     @Override
     public Set<Vet> findAll() {
-        return (Set<Vet>) vetRepository.findAll();
+        return StreamSupport.stream(vetRepository.findAll().spliterator(), false)
+                .collect(Collectors.toSet());
     }
 
     @Override
