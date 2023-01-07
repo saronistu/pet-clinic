@@ -7,6 +7,7 @@ import saron.springframework.petclinic.model.Owner;
 import saron.springframework.petclinic.repositories.OwnerRepository;
 import saron.springframework.petclinic.services.OwnerService;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -48,5 +49,10 @@ public class OwnerSpringDataJpaService implements OwnerService {
     @Override
     public Owner findByLastName(String lastName) {
         return ownerRepository.findByLastName(lastName);
+    }
+
+    @Override
+    public List<Owner> findAllByLastNameLike(String lastName) {
+        return ownerRepository.findAllByLastNameLike(lastName);
     }
 }

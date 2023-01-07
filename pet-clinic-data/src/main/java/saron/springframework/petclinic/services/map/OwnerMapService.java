@@ -9,7 +9,9 @@ import saron.springframework.petclinic.services.OwnerService;
 import saron.springframework.petclinic.services.PetService;
 import saron.springframework.petclinic.services.PetTypeService;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -64,5 +66,12 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
                 .filter(owner -> lastName.equalsIgnoreCase(owner.getLastName()))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public List<Owner> findAllByLastNameLike(String lastName) {
+        return findAll().stream()
+                .filter(owner -> owner.getLastName().contains(lastName))
+                .collect(Collectors.toList());
     }
 }
